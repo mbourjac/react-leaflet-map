@@ -11,12 +11,7 @@ module.exports = {
     'plugin:jsx-a11y/recommended',
     'prettier',
   ],
-  ignorePatterns: [
-    'dist',
-    '.eslintrc.cjs',
-    'postcss.config.js',
-    'tailwind.config.js',
-  ],
+  ignorePatterns: ['dist', '.eslintrc.cjs', 'postcss.config.js'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
