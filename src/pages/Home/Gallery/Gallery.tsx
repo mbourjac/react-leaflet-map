@@ -19,13 +19,12 @@ export const Gallery = ({ images }: GalleryProps) => {
 
   return (
     <section
-      className="p-main relative flex flex-col @container"
+      className="relative flex flex-col p-main @container"
       style={{
-        top: sectionOffset,
-        marginBottom: sectionOffset,
+        marginTop: sectionOffset,
       }}
     >
-      <div className="gap-main grid grid-cols-1 @[400px]:grid-cols-[repeat(auto-fill,minmax(400px,1fr))]">
+      <div className="grid grid-cols-1 gap-main @[400px]:grid-cols-[repeat(auto-fill,minmax(400px,1fr))]">
         {images.map((image, index) => (
           <GalleryImage
             key={index}
