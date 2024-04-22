@@ -1,11 +1,11 @@
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import L from 'leaflet';
 
-type GalleryImageMapProps = {
+type GalleryCardMapProps = {
   position: [number, number];
 };
 
-export const GalleryImageMap = ({ position }: GalleryImageMapProps) => {
+export const GalleryCardMap = ({ position }: GalleryCardMapProps) => {
   const svgIcon = L.divIcon({
     html: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">

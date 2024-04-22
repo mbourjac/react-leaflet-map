@@ -3,7 +3,7 @@ import tailwindConfig from '../../../../tailwind.config';
 import { useElementSize } from '../../../hooks/use-element-size';
 import { cn } from '../../../lib/tailwind';
 import type { GalleryImage as GalleryImageType } from '../Home.types';
-import { GalleryImage } from './GalleryImage';
+import { GalleryCard } from './GalleryCard';
 
 type GalleryProps = {
   images: GalleryImageType[];
@@ -26,7 +26,7 @@ export const Gallery = ({ images }: GalleryProps) => {
     >
       <div className="grid grid-cols-1 gap-main @[400px]:grid-cols-[repeat(auto-fill,minmax(400px,1fr))]">
         {images.map((image, index) => (
-          <GalleryImage
+          <GalleryCard
             key={index}
             {...image}
             ref={index === 0 ? firstImageRef : undefined}

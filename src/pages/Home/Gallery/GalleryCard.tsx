@@ -1,14 +1,14 @@
 import { forwardRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '../../../lib/tailwind';
-import type { GalleryImage as GalleryImageType } from '../Home.types';
-import { GalleryImageMap } from './GalleryImageMap';
+import type { GalleryImage } from '../Home.types';
+import { GalleryCardMap } from './GalleryCardMap';
 
-type GalleryImageProps = GalleryImageType & {
+type GalleryCardProps = GalleryImage & {
   className?: string;
 };
 
-export const GalleryImage = forwardRef<HTMLElement, GalleryImageProps>(
+export const GalleryCard = forwardRef<HTMLElement, GalleryCardProps>(
   ({ src, heading, date, coordinates, className }, ref?) => {
     const [displayedContent, setDisplayedContent] = useState<{
       isInfoDisplayed: boolean;
@@ -83,7 +83,7 @@ export const GalleryImage = forwardRef<HTMLElement, GalleryImageProps>(
               exit={{ opacity: 0, transition: { duration: 0.2 } }}
               className="absolute z-0 h-full w-full border border-transparent"
             >
-              <GalleryImageMap position={coordinates!} />
+              <GalleryCardMap position={coordinates!} />
             </motion.div>
           )}
           {isInfoDisplayed && (
@@ -153,4 +153,4 @@ export const GalleryImage = forwardRef<HTMLElement, GalleryImageProps>(
   },
 );
 
-GalleryImage.displayName = 'GalleryImage';
+GalleryCard.displayName = 'GalleryImage';
