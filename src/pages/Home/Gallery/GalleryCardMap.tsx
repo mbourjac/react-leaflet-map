@@ -1,4 +1,5 @@
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
+import { motion } from 'framer-motion';
 import L from 'leaflet';
 
 type GalleryCardMapProps = {
@@ -16,18 +17,25 @@ export const GalleryCardMap = ({ position }: GalleryCardMapProps) => {
   });
 
   return (
-    <MapContainer
-      center={position}
-      zoom={14}
-      scrollWheelZoom={true}
-      zoomControl={false}
-      className="h-full w-full"
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1, transition: { duration: 0.1 } }}
+      exit={{ opacity: 0, transition: { duration: 0.2 } }}
+      className="absolute z-0 h-full w-full border border-transparent"
     >
-      <TileLayer
-        url="https://tiles.stadiamaps.com/tiles/stamen_toner_background/{z}/{x}/{y}{r}.png"
-        attribution='&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      />
-      <Marker position={position} icon={svgIcon}></Marker>
-    </MapContainer>
+      <MapContainer
+        center={position}
+        zoom={14}
+        scrollWheelZoom={true}
+        zoomControl={false}
+        className="h-full w-full"
+      >
+        <TileLayer
+          url="https://tiles.stadiamaps.com/tiles/stamen_toner_background/{z}/{x}/{y}{r}.png"
+          attribution='&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        />
+        <Marker position={position} icon={svgIcon}></Marker>
+      </MapContainer>
+    </motion.div>
   );
 };
