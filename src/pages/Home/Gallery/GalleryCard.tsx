@@ -11,7 +11,10 @@ type GalleryCardProps = GalleryImage & {
 };
 
 export const GalleryCard = forwardRef<HTMLElement, GalleryCardProps>(
-  ({ src, heading, date, coordinates, className }, ref?) => {
+  ({ src, location: heading, date, coordinates, className }, ref?) => {
+    const [isTouched, setIsTouched] = useState(false);
+    const [isHovered, setIsHovered] = useState(false);
+
     const initialDisplayedContent = {
       isInfoDisplayed: true,
       isImageDisplayed: false,
@@ -27,7 +30,10 @@ export const GalleryCard = forwardRef<HTMLElement, GalleryCardProps>(
     const { isInfoDisplayed, isImageDisplayed, isMapDisplayed } =
       displayedContent;
 
-    const handleDisplayImage = () => {
+    const handleMouseEnter = () => {
+      setIsTouched(true);
+      setIsHovered(true);
+
       if (isMapDisplayed) return;
 
       setDisplayedContent({
@@ -35,6 +41,15 @@ export const GalleryCard = forwardRef<HTMLElement, GalleryCardProps>(
         isImageDisplayed: true,
         isMapDisplayed: false,
       });
+    };
+
+    const handleMouseLeave = () => {
+      if (isMapDisplayed) {
+        setIsTouched(false);
+      }
+
+      setIsHovered(false);
+      setDisplayedContent(initialDisplayedContent);
     };
 
     const handleDisplayMap = () => {
@@ -45,10 +60,6 @@ export const GalleryCard = forwardRef<HTMLElement, GalleryCardProps>(
       });
     };
 
-    const handleResetContent = () => {
-      setDisplayedContent(initialDisplayedContent);
-    };
-
     return (
       <motion.article
         ref={ref}
@@ -56,12 +67,14 @@ export const GalleryCard = forwardRef<HTMLElement, GalleryCardProps>(
           'relative aspect-[3/2] overflow-hidden bg-white font-medium uppercase',
           className,
         )}
-        onMouseEnter={handleDisplayImage}
-        onMouseLeave={handleResetContent}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       >
         <div className="absolute size-full border border-black" />
         <AnimatePresence>
-          {isImageDisplayed && <GalleryCardImage src={src} heading={heading} />}
+          {isImageDisplayed && (
+            <GalleryCardImage src={src} location={heading} />
+          )}
         </AnimatePresence>
         <AnimatePresence mode="wait" initial={false}>
           {isMapDisplayed && (
@@ -70,11 +83,13 @@ export const GalleryCard = forwardRef<HTMLElement, GalleryCardProps>(
           {isInfoDisplayed && (
             <GalleryCardInfo
               key="info"
-              heading={heading}
+              location={heading}
               date={date}
               coordinates={coordinates}
               isImageDisplayed={isImageDisplayed}
               handleDisplayMap={handleDisplayMap}
+              isCardTouched={isTouched}
+              isCardHovered={isHovered}
             />
           )}
         </AnimatePresence>
