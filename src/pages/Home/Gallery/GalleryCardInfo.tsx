@@ -72,6 +72,7 @@ export const GalleryCardInfo = ({
           <button className="flex items-end p-main" onClick={handleDisplayMap}>
             <span className="inline-block">
               <PinIcon />
+              <span className="sr-only">Display map</span>
             </span>
           </button>
         )}
